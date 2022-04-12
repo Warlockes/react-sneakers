@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 
+import { NextArrow, PrevArrow } from "./Arrows";
 import SliderImage from "../../img/SliderImage.png";
 import SliderLogo from "../../img/SliderLogo.png";
 import "slick-carousel/slick/slick.css";
@@ -10,15 +11,15 @@ import styles from "./ContentSlider.module.scss";
 export const ContentSlider = () => {
   const settings = {
     infinite: true,
-    speed: 400,
+    speed: 1500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
+    autoplay: true,
+    autoplaySpeed: 8000,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
   };
-
-  //TODO:
-  // Сделать кастомные стрелки для слайдера
-  // Продолжить верстку
 
   return (
     <Slider {...settings}>
@@ -27,7 +28,7 @@ export const ContentSlider = () => {
           <div className={styles.slider}>
             <div className={styles.leftSide}>
               <div className={styles.logoContainer}>
-                <img src={SliderLogo} />
+                <img src={SliderLogo} alt="Logo" />
               </div>
               <div className={styles.description}>
                 <p>

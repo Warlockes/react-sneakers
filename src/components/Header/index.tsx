@@ -1,8 +1,7 @@
-import React from "react";
 import Logo from "../../img/logo.png";
-import CartIcon from "../../img/icons/Cart.svg";
-import FavoritesIcon from "../../img/icons/Favorites.svg";
-import OrdersIcon from "../../img/icons/Orders.svg";
+import { ReactComponent as CartIcon } from "../../img/icons/Cart.svg";
+import { ReactComponent as FavoritesIcon } from "../../img/icons/Favorites.svg";
+import { ReactComponent as OrdersIcon } from "../../img/icons/Orders.svg";
 
 import styles from "./Header.module.scss";
 
@@ -18,15 +17,11 @@ export const Header = () => {
       </div>
       <div className={styles.headerButtons}>
         <div className={styles.cartBlock}>
-          <img src={CartIcon} alt="Cart" />
+          <CartIcon className={styles.cartIcon} />
           <span>1205 руб.</span>
         </div>
-        <div className={styles.favorites}>
-          <img src={FavoritesIcon} alt="Favorites" />
-        </div>
-        <div className={styles.orders}>
-          <img src={OrdersIcon} alt="Favorites" />
-        </div>
+        <FavoritesIcon className={styles.favoritesIcon} />
+        <OrdersIcon className={styles.orderIcon} />
       </div>
     </div>
   );

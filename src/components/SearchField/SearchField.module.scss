@@ -1,0 +1,33 @@
+.searchBlock {
+  height: 45px;
+  width: 250px;
+  border: 1px solid #f3f3f3;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 15px;
+  transition: all 0.3s ease-in-out;
+  cursor: text;
+
+  & > input {
+    margin-left: 13px;
+    height: 45px;
+    border: none;
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    &::placeholder {
+      font-size: 14px;
+      color: #c4c4c4;
+    }
+  }
+}
+
+.focusedSearch {
+  border-color: #a5d364;
+  box-shadow: 0 0 10px 0 rgba(165, 211, 100, 0.6),
+    0 0 6px 0 rgba(165, 211, 100, 0.8), 0 0 10px 0 rgba(165, 211, 100, 0.6);
+}

@@ -12,6 +12,14 @@
   &::before {
     content: none !important;
   }
+
+  &:hover {
+    background: darken(#fff, 5%) !important;
+  }
+
+  &:active {
+    background: darken(#fff, 10%) !important;
+  }
 }
 
 .nextArrow {

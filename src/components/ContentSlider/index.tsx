@@ -24,7 +24,7 @@ export const ContentSlider = () => {
   return (
     <Slider {...settings}>
       {[1, 2, 3, 4].map((_, index) => (
-        <div style={{ margin: "0 15px" }} key={index}>
+        <div key={index}>
           <div className={styles.slider}>
             <div className={styles.leftSide}>
               <div className={styles.logoContainer}>
@@ -34,7 +34,12 @@ export const ContentSlider = () => {
                 <p>
                   <span>Stan Smith</span>, Forever!
                 </p>
-                <button className={styles.sliderBtn}>Купить</button>
+                <a
+                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                  target="_blank"
+                >
+                  <button className={styles.sliderBtn}>Купить</button>
+                </a>
               </div>
             </div>
             <div>

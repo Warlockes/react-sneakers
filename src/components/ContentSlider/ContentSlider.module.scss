@@ -5,7 +5,7 @@
   overflow: hidden;
   display: flex;
   justify-content: space-between;
-  margin: 0 5px;
+  margin: 0 5px 40px;
 }
 
 .leftSide {
@@ -37,7 +37,7 @@
     }
   }
 
-  & > button {
+  & button {
     padding: 14px 50px;
     color: #fff;
     border-radius: 110px;
@@ -47,5 +47,13 @@
     font-weight: 700;
     font-size: 16px;
     text-transform: uppercase;
+
+    &:hover {
+      background-color: darken(#a5d364, 5%);
+    }
+
+    &:active {
+      background-color: darken(#a5d364, 10%);
+    }
   }
 }

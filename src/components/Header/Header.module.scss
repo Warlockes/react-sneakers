@@ -30,15 +30,21 @@
   align-items: center;
   cursor: pointer;
 
-  & > img {
-    margin-right: 10px;
-  }
-
   & > span {
     font-weight: 600;
     font-size: 14px;
     color: #5c5c5c;
   }
+
+  &:hover {
+    .cartIcon path {
+      stroke: #a5d364;
+    }
+  }
+}
+
+.cartIcon {
+  margin-right: 10px;
 }
 
 .headerButtons {
@@ -46,8 +52,24 @@
   align-items: center;
 }
 
-.favorites,
-.orders {
+.favoritesIcon,
+.orderIcon {
   margin-left: 30px;
   cursor: pointer;
+}
+
+.favoritesIcon {
+  &:hover {
+    path {
+      fill: #dd8484;
+    }
+  }
+}
+
+.orderIcon {
+  &:hover {
+    path {
+      fill: #88c3e7;
+    }
+  }
 }

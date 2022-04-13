@@ -1,0 +1,95 @@
+.productCard {
+  background-color: #fff;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+  border: 1px solid #f3f3f3;
+  max-width: 220px;
+  position: relative;
+  overflow: hidden;
+  padding: 10px 30px 20px;
+  margin: 0 10px 40px;
+
+  &.active {
+    border: 1px solid #f8f8f8;
+    box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.cardImageContainer {
+  margin-bottom: 5px;
+  & img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.description {
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+
+  & p:first-child {
+    font-weight: 500;
+    font-size: 11px;
+    color: #bdbdbd;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  & p:last-child {
+    font-weight: 700;
+    font-size: 14px;
+  }
+}
+
+.addButton {
+  border: 1px solid #f2f2f2;
+
+  &:hover {
+    background: darken(#fff, 5%);
+  }
+}
+
+.addedProduct {
+  background: linear-gradient(180deg, #89f09c 0%, #3cc755 100%);
+}
+
+.favoritesBtn {
+  border: 1px solid #f8f8f8;
+  position: absolute;
+  top: 30px;
+
+  & svg path {
+    fill: #ececec;
+  }
+
+  &:hover {
+    background: #fef0f0;
+    background: lighten(#fef0f0, 1%);
+
+    & svg path {
+      fill: #ff8585;
+    }
+  }
+}
+
+.favoriteAdded {
+  position: absolute;
+  top: 30px;
+  background: #fef0f0;
+}
+
+.productList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 -10px;
+}

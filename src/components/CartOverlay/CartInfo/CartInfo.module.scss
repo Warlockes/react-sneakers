@@ -1,0 +1,39 @@
+.infoCartContainer {
+  display: flex;
+  height: calc(100% - 59px);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  & p {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 40px;
+    opacity: 0.5;
+  }
+}
+
+.imageContainer {
+  height: 120px;
+  width: 120px;
+  margin-bottom: 20px;
+
+  & > img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.cartBackBtn {
+  & svg {
+    position: relative;
+    right: 20px;
+    transform: rotate(180deg);
+  }
+}
+
+.orderTitle {
+  color: #87c20a;
+  font-weight: 600;
+}

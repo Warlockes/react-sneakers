@@ -16,6 +16,12 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+a:-webkit-any-link {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .btn {
   width: 32px;
   height: 32px;
@@ -25,4 +31,27 @@ body {
   cursor: pointer;
   border-radius: 8px;
   background: #fff;
+}
+
+.cartBtn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  height: 55px;
+  background: #9dd458;
+  border: none;
+  border-radius: 18px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  max-width: 250px;
+
+  &:hover {
+    background: darken(#9dd458, 5%);
+  }
+
+  &:active {
+    background: darken(#9dd458, 10%);
+  }
 }

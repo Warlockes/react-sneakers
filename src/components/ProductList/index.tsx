@@ -7,8 +7,12 @@ import { ReactComponent as FavoritesIcon } from "../../img/icons/Favorites.svg";
 import { ReactComponent as FavoriteAddIcon } from "../../img/icons/FavoriteAdd.svg";
 import Sheakears from "../../img/Sneakers.png";
 import styles from "./ProductList.module.scss";
+import { ItemLoader } from "../ItemLoader";
 
 const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+//TODO:
+// 1) При наведении на элемент делать boxShadow
 
 export const ProductList = () => {
   return (

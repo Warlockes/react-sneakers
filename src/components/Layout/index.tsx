@@ -1,4 +1,5 @@
 import React from "react";
+import { CartOverlay } from "../CartOverlay";
 import { Header } from "../Header";
 
 import styles from "./Layout.module.scss";
@@ -13,6 +14,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className={styles.appContent}>
         <Header />
         <div className={styles.body}>{children}</div>
+        <CartOverlay />
       </div>
     </div>
   );

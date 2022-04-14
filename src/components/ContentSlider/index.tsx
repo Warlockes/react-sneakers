@@ -36,6 +36,7 @@ export const ContentSlider = () => {
                 <a
                   href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <button className={styles.sliderBtn}>Купить</button>
                 </a>

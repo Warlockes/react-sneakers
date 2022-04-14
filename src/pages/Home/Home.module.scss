@@ -4,3 +4,17 @@
   align-items: center;
   margin-bottom: 40px;
 }
+
+.productList {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -33.335px;
+
+  @media (max-width: 1200px) {
+    margin: 0 -35px;
+  }
+
+  @media (max-width: 920px) {
+    margin: 0 -45px;
+  }
+}

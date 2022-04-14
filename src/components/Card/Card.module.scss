@@ -29,6 +29,9 @@
 
 .cardImageContainer {
   margin-bottom: 5px;
+  height: 140px;
+  width: 160px;
+
   & img {
     height: 100%;
     width: 100%;
@@ -94,22 +97,4 @@
   position: absolute;
   top: 30px;
   background: #fef0f0;
-}
-
-.productList {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -33.335px;
-
-  @media (max-width: 1200px) {
-    margin: 0 -35px;
-  }
-
-  @media (max-width: 920px) {
-    margin: 0 -45px;
-  }
-}
-
-.productCardLoader {
-  padding: 0;
 }

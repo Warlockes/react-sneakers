@@ -33,6 +33,7 @@ export const sneakersSlice = createSlice({
     setLoadingStatus(state) {
       state.loadingStatus = LoadingStatus.LOADING;
     },
+
     setSneakersData(state, action) {
       state.items = action.payload;
       state.loadingStatus = LoadingStatus.LOADED;
@@ -40,12 +41,12 @@ export const sneakersSlice = createSlice({
   },
 });
 
-export const { setLoadingStatus, setSneakersData } = sneakersSlice.actions;
-
 export const fetchSneakers = () => async (dispatch: AppDispatch) => {
   dispatch(setLoadingStatus());
   const response = await API.fetchSneakers();
   dispatch(setSneakersData(response));
 };
+
+export const { setLoadingStatus, setSneakersData } = sneakersSlice.actions;
 
 export default sneakersSlice.reducer;

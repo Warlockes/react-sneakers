@@ -1,15 +1,39 @@
 import classNames from "classnames";
-import React from "react";
-import { InfoBlock } from "../../components/InfoBlock";
-import { ProductList } from "../../components/ProductList";
 
+import { InfoBlock } from "../../components/InfoBlock";
+import { Card } from "../../components/Card";
 import { ReactComponent as BackIcon } from "../../img/icons/Back.svg";
 import EmptyFavorites from "../../img/FavoriteImage.png";
 import styles from "./Favorites.module.scss";
-
-const items: number[] = [];
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectFavoritesState,
+  selectIsFavoritesItemsLoading,
+} from "../../redux/features/favorites/selectors";
+import { useEffect } from "react";
+import { LoadingStatus } from "../../redux/features/sneakers/sneakersSlice";
+import { fetchFavoritesItems } from "../../redux/features/favorites/favoritesSlice";
+import { ItemsLoader } from "../../components/ItemsLoader";
 
 export const Favorites = () => {
+  const dispatch = useDispatch();
+  const { items, loadingStatus } = useSelector(selectFavoritesState);
+  const isLoading = useSelector(selectIsFavoritesItemsLoading);
+
+  useEffect(() => {
+    if (loadingStatus === LoadingStatus.NEVER) {
+      dispatch(fetchFavoritesItems());
+    }
+  }, [dispatch, loadingStatus]);
+
+  if (isLoading) {
+    return (
+      <div className={styles.productList}>
+        <ItemsLoader />
+      </div>
+    );
+  }
+
   return (
     <>
       {items.length > 0 ? (
@@ -20,7 +44,11 @@ export const Favorites = () => {
             </div>
             <h2>Мои закладки</h2>
           </div>
-          <ProductList items={[]} />
+          <div className={styles.productList}>
+            {items.map((item) => (
+              <Card key={item.id} item={item} />
+            ))}
+          </div>
         </>
       ) : (
         <InfoBlock

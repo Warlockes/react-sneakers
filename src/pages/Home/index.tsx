@@ -2,21 +2,23 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ContentSlider } from "../../components/ContentSlider";
-import { ProductList } from "../../components/ProductList";
+import { Card } from "../../components/Card";
 import { SearchField } from "../../components/SearchField";
 import {
   fetchSneakers,
   LoadingStatus,
 } from "../../redux/features/sneakers/sneakersSlice";
-import { RootState } from "../../redux/store";
+import { ItemsLoader } from "../../components/ItemsLoader";
+import {
+  selectIsSneakersLoading,
+  selectSneakersState,
+} from "../../redux/features/sneakers/selectors";
 import styles from "./Home.module.scss";
 
-export const Home = () => {
+export const Home: React.FC = () => {
   const dispatch = useDispatch();
-  const { items, loadingStatus } = useSelector(
-    (state: RootState) => state.sneakers
-  );
-  const isLoading = loadingStatus === LoadingStatus.LOADING;
+  const { items, loadingStatus } = useSelector(selectSneakersState);
+  const isLoading = useSelector(selectIsSneakersLoading);
 
   useEffect(() => {
     if (loadingStatus === LoadingStatus.NEVER) {
@@ -31,7 +33,17 @@ export const Home = () => {
         <h2>Все кроссовки</h2>
         <SearchField />
       </div>
-      <ProductList items={items} loading={isLoading} />
+      <div className={styles.productList}>
+        {isLoading ? (
+          <ItemsLoader />
+        ) : (
+          <>
+            {items.map((item) => (
+              <Card key={item.id} item={item} />
+            ))}
+          </>
+        )}
+      </div>
     </>
   );
 };

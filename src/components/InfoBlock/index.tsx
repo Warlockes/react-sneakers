@@ -39,7 +39,7 @@ export const InfoBlock: React.FC<InfoBlockProps> = ({
           [`${styles.smallImageContainer}`]: pathname !== "/",
         })}
       >
-        <img src={imageSrc} alt="Info image" />
+        <img src={imageSrc} alt="Info" />
       </div>
       <h2 className={classNames({ [`${styles.orderTitle}`]: isOrder })}>
         {title}

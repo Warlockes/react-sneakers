@@ -1,11 +1,11 @@
 import React from "react";
 import classNames from "classnames";
-
-import styles from "./InfoBlock.module.scss";
 import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { ReactComponent as OrderIcon } from "../../img/icons/Order.svg";
 import { toggleCartVisible } from "../../redux/features/cart/cartSlice";
-import { useLocation, useNavigate } from "react-router-dom";
+import styles from "./InfoBlock.module.scss";
 
 interface InfoBlockProps {
   title: string;

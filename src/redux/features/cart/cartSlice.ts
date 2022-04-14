@@ -12,7 +12,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    toggleCartVisible: (state) => {
+    toggleCartVisible(state) {
       state.isOpenCart = !state.isOpenCart;
     },
   },

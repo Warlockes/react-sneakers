@@ -20,7 +20,7 @@ export const Orders = () => {
             </div>
             <h2>Мои покупки</h2>
           </div>
-          <ProductList />
+          <ProductList items={[]} />
         </>
       ) : (
         <InfoBlock

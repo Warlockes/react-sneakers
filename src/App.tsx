@@ -1,7 +1,7 @@
-import React from "react";
-import { Home } from "./pages/Home";
-import { Layout } from "./components/Layout";
 import { Routes, Route } from "react-router-dom";
+
+import { Layout } from "./components/Layout";
+import { Home } from "./pages/Home";
 import { Favorites } from "./pages/Favorites";
 import { Orders } from "./pages/Orders";
 

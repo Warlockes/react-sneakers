@@ -1,7 +1,7 @@
 import React from "react";
+
 import { CartOverlay } from "../CartOverlay";
 import { Header } from "../Header";
-
 import styles from "./Layout.module.scss";
 
 interface LayoutProps {

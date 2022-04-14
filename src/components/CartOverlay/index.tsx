@@ -1,17 +1,16 @@
 import React from "react";
 import classNames from "classnames";
+import { useDispatch, useSelector } from "react-redux";
 
 import Sneakers from "../../img/Sneakers.png";
+import EmptyCart from "../../img/EmptyCart.png";
+import CartOrder from "../../img/CreateOrder.png";
 import { ReactComponent as DeleteIcon } from "../../img/icons/Delete.svg";
 import { ReactComponent as OrderIcon } from "../../img/icons/Order.svg";
-
-import styles from "./CartOverlay.module.scss";
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { toggleCartVisible } from "../../redux/features/cart/cartSlice";
 import { InfoBlock } from "../InfoBlock";
-import EmptyCart from "../../img/EmptyCart.png";
-import CartOrder from "../../img/CreateOrder.png";
+import styles from "./CartOverlay.module.scss";
 
 const cartItems: number[] = [];
 

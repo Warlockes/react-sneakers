@@ -1,5 +1,5 @@
-import classNames from "classnames";
 import React from "react";
+import classNames from "classnames";
 
 import NextArrowIcon from "../../../img/icons/NextArrow.svg";
 import styles from "./Arrows.module.scss";

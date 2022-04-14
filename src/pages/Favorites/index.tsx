@@ -20,7 +20,7 @@ export const Favorites = () => {
             </div>
             <h2>Мои закладки</h2>
           </div>
-          <ProductList />
+          <ProductList items={[]} />
         </>
       ) : (
         <InfoBlock

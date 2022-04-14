@@ -1,12 +1,12 @@
-import Logo from "../../img/logo.png";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import { ReactComponent as CartIcon } from "../../img/icons/Cart.svg";
 import { ReactComponent as FavoritesIcon } from "../../img/icons/Favorites.svg";
 import { ReactComponent as OrdersIcon } from "../../img/icons/Orders.svg";
-import { Link } from "react-router-dom";
-
-import styles from "./Header.module.scss";
-import { useDispatch } from "react-redux";
 import { toggleCartVisible } from "../../redux/features/cart/cartSlice";
+import Logo from "../../img/logo.png";
+import styles from "./Header.module.scss";
 
 export const Header = () => {
   const dispatch = useDispatch();

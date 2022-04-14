@@ -11,6 +11,10 @@
     margin-bottom: 40px;
     opacity: 0.5;
   }
+
+  & > h2 {
+    margin-bottom: 20px;
+  }
 }
 
 .imageContainer {
@@ -36,4 +40,9 @@
 .orderTitle {
   color: #87c20a;
   font-weight: 600;
+}
+
+.smallImageContainer {
+  height: 70px;
+  width: 70px;
 }

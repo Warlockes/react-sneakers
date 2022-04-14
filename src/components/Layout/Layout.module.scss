@@ -1,8 +1,7 @@
 .appWrapper {
-  background-color: #e7f6ff;
   height: 100%;
   width: 100%;
-  padding-top: 85px;
+  padding: 85px 0;
 }
 
 .appContent {
@@ -11,10 +10,18 @@
   min-width: 600px;
   height: 100%;
   margin: 0 auto;
-  border-radius: 20px 20px 0 0;
+  border-radius: 20px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+
+  @media (max-width: 1200px) {
+    max-width: 920px;
+  }
+
+  @media (max-width: 920px) {
+    max-width: 650px;
+  }
 }
 
 .body {
-  padding: 45px 60px 0px;
+  padding: 45px 60px;
 }

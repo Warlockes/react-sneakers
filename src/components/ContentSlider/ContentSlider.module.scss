@@ -33,7 +33,10 @@
     margin-bottom: 30px;
 
     & > span {
-      color: #8bb43c;
+      &:first-child {
+        color: #8bb43c;
+        display: block;
+      }
     }
   }
 

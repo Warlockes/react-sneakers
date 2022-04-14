@@ -32,7 +32,7 @@ export const ContentSlider = () => {
               </div>
               <div className={styles.description}>
                 <p>
-                  <span>Stan Smith</span>, Forever!
+                  <span>Stan Smith,</span>Forever!
                 </p>
                 <a
                   href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"

@@ -9,9 +9,11 @@ import styles from "./CartOverlay.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { toggleCartVisible } from "../../redux/features/cart/cartSlice";
-import { CartInfo } from "./CartInfo";
+import { InfoBlock } from "../InfoBlock";
+import EmptyCart from "../../img/EmptyCart.png";
+import CartOrder from "../../img/CreateOrder.png";
 
-const cartItems: number[] = [1];
+const cartItems: number[] = [];
 
 export const CartOverlay = () => {
   const isOpen = useSelector((state: RootState) => state.cart.isOpenCart);
@@ -69,7 +71,18 @@ export const CartOverlay = () => {
               </div>
             </>
           ) : (
-            <CartInfo />
+            // <InfoBlock
+            //   title="Корзина пуста"
+            //   description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ"
+            //   imageSrc={EmptyCart}
+            // />
+
+            <InfoBlock
+              title="Заказ оформлен!"
+              description="Ваш заказ #18 скоро будет передан курьерской доставке"
+              imageSrc={CartOrder}
+              isOrder
+            />
           )}
         </div>
       </div>

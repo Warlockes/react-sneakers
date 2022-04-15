@@ -17,7 +17,7 @@ import { fetchDeleteCartItem } from "../../redux/features/sneakers/sneakersSlice
 //TODO:
 // 1) Сделать loader для корзины
 // 2) Добавить для иконок header иконки с количеством добавленных товаров
-// 3) сделать загрузку не в home, а выше
+// 3) Сместить лоадер в избранном вниз, чтобы был там, где появляются карточки
 
 export const CartOverlay: React.FC = () => {
   const dispatch = useDispatch();

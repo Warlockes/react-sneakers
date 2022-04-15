@@ -71,7 +71,7 @@
 }
 
 .addedProduct {
-  background: linear-gradient(180deg, #89f09c 0%, #3cc755 100%);
+  background: linear-gradient(180deg, #89f09c 0%, #3cc755 100%) !important;
 }
 
 .favoritesBtn {
@@ -96,5 +96,5 @@
 .favoriteAdded {
   position: absolute;
   top: 30px;
-  background: #fef0f0;
+  background: #fef0f0 !important;
 }

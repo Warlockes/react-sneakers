@@ -13,8 +13,9 @@ import {
 import styles from "./Favorites.module.scss";
 
 export const Favorites: React.FC = () => {
-  const { favoriteItems } = useSelector(selectSneakersState);
+  const { items } = useSelector(selectSneakersState);
   const isLoading = useSelector(selectIsSneakersLoading);
+  const favoriteItems = items.filter(({ added2Favorites }) => added2Favorites);
 
   if (isLoading) {
     return (

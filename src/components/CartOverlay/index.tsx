@@ -12,14 +12,18 @@ import { selectCartState } from "../../redux/features/cart/selectors";
 import { getTax } from "../../utils/utils";
 import { selectSneakersState } from "../../redux/features/sneakers/selectors";
 import styles from "./CartOverlay.module.scss";
+import { fetchDeleteCartItem } from "../../redux/features/sneakers/sneakersSlice";
 
 //TODO:
 // 1) Сделать loader для корзины
+// 2) Добавить для иконок header иконки с количеством добавленных товаров
+// 3) сделать загрузку не в home, а выше
 
 export const CartOverlay: React.FC = () => {
   const dispatch = useDispatch();
   const { isOpenCart } = useSelector(selectCartState);
-  const { cartItems } = useSelector(selectSneakersState);
+  const { items, totalPrice } = useSelector(selectSneakersState);
+  const cartItems = items.filter(({ added2Cart }) => added2Cart);
 
   const handleClickOutsideCart = (event: React.MouseEvent) => {
     const { target } = event;
@@ -42,31 +46,38 @@ export const CartOverlay: React.FC = () => {
           {cartItems.length > 0 ? (
             <>
               <div className={styles.cartList}>
-                {cartItems.map(({ id, imageUrl, price, title }) => (
-                  <div key={id} className={styles.cartItem}>
-                    <div className={styles.itemImageContainer}>
-                      <img src={imageUrl} alt="Cart Item" />
+                {cartItems.map((item) => {
+                  const { id, imageUrl, price, title } = item;
+
+                  return (
+                    <div key={id} className={styles.cartItem}>
+                      <div className={styles.itemImageContainer}>
+                        <img src={imageUrl} alt="Cart Item" />
+                      </div>
+                      <div className={styles.description}>
+                        <p>{title}</p>
+                        <p>{price} руб.</p>
+                      </div>
+                      <div
+                        className={classNames("btn", styles.deleteBtn)}
+                        onClick={() => dispatch(fetchDeleteCartItem(item))}
+                      >
+                        <DeleteIcon />
+                      </div>
                     </div>
-                    <div className={styles.description}>
-                      <p>{title}</p>
-                      <p>{price} руб.</p>
-                    </div>
-                    <div className={classNames("btn", styles.deleteBtn)}>
-                      <DeleteIcon />
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
               <div className={styles.orderContainer}>
                 <div>
                   <p>Итого:</p>
                   <div />
-                  <p>{125} руб.</p>
+                  <p>{totalPrice} руб.</p>
                 </div>
                 <div>
                   <p>Налог 5%:</p>
                   <div />
-                  <p>{getTax(125)} руб.</p>
+                  <p>{getTax(totalPrice)} руб.</p>
                 </div>
                 <div className={classNames(styles.orderBnt, "cartBtn")}>
                   <span>Оформить заказ</span>

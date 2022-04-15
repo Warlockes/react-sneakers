@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -6,26 +6,20 @@ import EmptyCart from "../../img/EmptyCart.png";
 import CartOrder from "../../img/CreateOrder.png";
 import { ReactComponent as DeleteIcon } from "../../img/icons/Delete.svg";
 import { ReactComponent as OrderIcon } from "../../img/icons/Order.svg";
-import {
-  fetchCartItems,
-  toggleCartVisible,
-} from "../../redux/features/cart/cartSlice";
+import { toggleCartVisible } from "../../redux/features/cart/cartSlice";
 import { InfoBlock } from "../InfoBlock";
-import { LoadingStatus } from "../../redux/features/sneakers/sneakersSlice";
 import { selectCartState } from "../../redux/features/cart/selectors";
-import styles from "./CartOverlay.module.scss";
 import { getTax } from "../../utils/utils";
+import { selectSneakersState } from "../../redux/features/sneakers/selectors";
+import styles from "./CartOverlay.module.scss";
 
-export const CartOverlay = () => {
+//TODO:
+// 1) Сделать loader для корзины
+
+export const CartOverlay: React.FC = () => {
   const dispatch = useDispatch();
-  const { isOpenCart, items, loadingStatus, totalPrice } =
-    useSelector(selectCartState);
-
-  useEffect(() => {
-    if (loadingStatus === LoadingStatus.NEVER) {
-      dispatch(fetchCartItems());
-    }
-  }, [loadingStatus, dispatch]);
+  const { isOpenCart } = useSelector(selectCartState);
+  const { cartItems } = useSelector(selectSneakersState);
 
   const handleClickOutsideCart = (event: React.MouseEvent) => {
     const { target } = event;
@@ -45,10 +39,10 @@ export const CartOverlay = () => {
       <div className={styles.cart}>
         <h2>Корзина</h2>
         <div className={styles.cartContent}>
-          {items.length > 0 ? (
+          {cartItems.length > 0 ? (
             <>
               <div className={styles.cartList}>
-                {items.map(({ id, imageUrl, price, title }) => (
+                {cartItems.map(({ id, imageUrl, price, title }) => (
                   <div key={id} className={styles.cartItem}>
                     <div className={styles.itemImageContainer}>
                       <img src={imageUrl} alt="Cart Item" />
@@ -67,12 +61,12 @@ export const CartOverlay = () => {
                 <div>
                   <p>Итого:</p>
                   <div />
-                  <p>{totalPrice} руб.</p>
+                  <p>{125} руб.</p>
                 </div>
                 <div>
                   <p>Налог 5%:</p>
                   <div />
-                  <p>{getTax(totalPrice)} руб.</p>
+                  <p>{getTax(125)} руб.</p>
                 </div>
                 <div className={classNames(styles.orderBnt, "cartBtn")}>
                   <span>Оформить заказ</span>

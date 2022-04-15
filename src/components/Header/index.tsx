@@ -7,11 +7,9 @@ import { ReactComponent as OrdersIcon } from "../../img/icons/Orders.svg";
 import { toggleCartVisible } from "../../redux/features/cart/cartSlice";
 import Logo from "../../img/logo.png";
 import styles from "./Header.module.scss";
-import { RootState } from "../../redux/store";
 
 export const Header = () => {
   const dispatch = useDispatch();
-  const { totalPrice } = useSelector((state: RootState) => state.cart);
 
   const handleChangeCartVisible = () => {
     dispatch(toggleCartVisible());
@@ -31,7 +29,7 @@ export const Header = () => {
       <div className={styles.headerButtons}>
         <div className={styles.cartBlock} onClick={handleChangeCartVisible}>
           <CartIcon />
-          {totalPrice > 0 && <span>{totalPrice} руб.</span>}
+          {0 > 0 && <span>{0} руб.</span>}
         </div>
         <Link to="/favorites">
           <FavoritesIcon className={styles.favoritesIcon} />

@@ -3,10 +3,12 @@ import { API } from "../../../api/api";
 import { AppDispatch } from "../../store";
 
 export interface SneakersItem {
-  id: number;
+  id: string;
   title: string;
   imageUrl: string;
   price: number;
+  added2Cart: boolean;
+  added2Favorites: boolean;
 }
 
 export enum LoadingStatus {
@@ -18,11 +20,15 @@ export enum LoadingStatus {
 
 export interface SneakersState {
   items: SneakersItem[];
+  cartItems: SneakersItem[];
+  favoriteItems: SneakersItem[];
   loadingStatus: LoadingStatus;
 }
 
 const initialState: SneakersState = {
   items: [],
+  cartItems: [],
+  favoriteItems: [],
   loadingStatus: LoadingStatus.NEVER,
 };
 
@@ -34,8 +40,10 @@ export const sneakersSlice = createSlice({
       state.loadingStatus = LoadingStatus.LOADING;
     },
 
-    setSneakersData(state, action) {
+    setInitialData(state, action) {
       state.items = action.payload;
+      state.cartItems = state.items.filter((item) => item.added2Cart);
+      state.favoriteItems = state.items.filter((item) => item.added2Favorites);
       state.loadingStatus = LoadingStatus.LOADED;
     },
   },
@@ -43,10 +51,10 @@ export const sneakersSlice = createSlice({
 
 export const fetchSneakers = () => async (dispatch: AppDispatch) => {
   dispatch(setLoadingStatus());
-  const response = await API.fetchSneakers();
-  dispatch(setSneakersData(response));
+  const response = await API.fetchItems();
+  dispatch(setInitialData(response));
 };
 
-export const { setLoadingStatus, setSneakersData } = sneakersSlice.actions;
+export const { setLoadingStatus, setInitialData } = sneakersSlice.actions;
 
 export default sneakersSlice.reducer;

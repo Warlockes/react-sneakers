@@ -7,6 +7,7 @@ import { ReactComponent as FavoritesIcon } from "../../img/icons/Favorites.svg";
 import { ReactComponent as FavoriteAddIcon } from "../../img/icons/FavoriteAdd.svg";
 import { SneakersItem } from "../../redux/features/sneakers/sneakersSlice";
 import styles from "./Card.module.scss";
+import { useDispatch } from "react-redux";
 
 interface CardProps {
   item: SneakersItem;
@@ -15,6 +16,7 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ item, favorite, added }) => {
+  const dispatch = useDispatch();
   const { imageUrl, price, title } = item;
 
   return (

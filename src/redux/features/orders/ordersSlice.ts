@@ -28,12 +28,6 @@ export const ordersSlice = createSlice({
   },
 });
 
-export const fetchOrdersItems = () => async (dispatch: AppDispatch) => {
-  dispatch(setLoadingStatus());
-  const response = await API.fetchOrdersItems();
-  dispatch(setOrdersItems(response));
-};
-
 export const { setOrdersItems, setLoadingStatus } = ordersSlice.actions;
 
 export default ordersSlice.reducer;

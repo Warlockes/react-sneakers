@@ -1,31 +1,25 @@
 import axios from "axios";
 
 export const API = {
-  async fetchSneakers() {
+  async fetchItems() {
     const { data } = await axios.get(
-      "https://61752ca008834f0017c70b34.mockapi.io/sneakers"
+      `https://61752ca008834f0017c70b34.mockapi.io/sneakers`
     );
     return data;
   },
 
-  async fetchCartItems() {
-    const { data } = await axios.get(
-      "https://61752ca008834f0017c70b34.mockapi.io/cart"
-    );
-    return data;
-  },
+  // async deleteCartItem(id: string) {
+  //   const { data } = await axios.delete(
+  //     `https://61752ca008834f0017c70b34.mockapi.io/cart/${id}`
+  //   );
+  //   return data;
+  // },
 
-  async fetchOrdersItems() {
-    const { data } = await axios.get(
-      "https://61752ca008834f0017c70b34.mockapi.io/orders"
-    );
-    return data;
-  },
-
-  async fetchFavoritesItems() {
-    const { data } = await axios.get(
-      "https://61752ca008834f0017c70b34.mockapi.io/favorites"
-    );
-    return data;
-  },
+  // async addCartItem(item: SneakersItem) {
+  //   const { data } = await axios.post(
+  //     "https://61752ca008834f0017c70b34.mockapi.io/cart",
+  //     item
+  //   );
+  //   return data;
+  // },
 };

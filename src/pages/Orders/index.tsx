@@ -12,19 +12,12 @@ import {
 } from "../../redux/features/orders/selectors";
 import { useEffect } from "react";
 import { LoadingStatus } from "../../redux/features/sneakers/sneakersSlice";
-import { fetchOrdersItems } from "../../redux/features/orders/ordersSlice";
 import { ItemsLoader } from "../../components/ItemsLoader";
 
 export const Orders = () => {
   const dispatch = useDispatch();
   const { items, loadingStatus } = useSelector(selectOrsersState);
   const isLoading = useSelector(selectIsOrdersItemsLoading);
-
-  useEffect(() => {
-    if (loadingStatus === LoadingStatus.NEVER) {
-      dispatch(fetchOrdersItems());
-    }
-  }, [dispatch, loadingStatus]);
 
   if (isLoading) {
     return (

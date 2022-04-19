@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
+import classNames from "classnames";
 
 import EmptyCart from "../../img/EmptyCart.png";
 import CartOrder from "../../img/CreateOrder.png";
@@ -22,7 +22,6 @@ import styles from "./CartOverlay.module.scss";
 //TODO:
 // 1) Сделать loader для корзины
 // 2) Добавить для иконок header иконки с количеством добавленных товаров
-// 3) Поправить верстку и выдавать заказы по номерам: заказ 1: []...
 
 export const CartOverlay: React.FC = () => {
   const [cartInfo, setCartInfo] = useState<"empty" | "order">("empty");
@@ -50,7 +49,12 @@ export const CartOverlay: React.FC = () => {
   const handleOrder = () => {
     setCartInfo("order");
     dispatch(fetchOrder(cartItems));
-    dispatch(addOrder(cartItems.map(({ id }) => id)));
+    dispatch(
+      addOrder({
+        id: `${orders.length + 1}`,
+        order: cartItems.map(({ id }) => id),
+      })
+    );
   };
 
   return (

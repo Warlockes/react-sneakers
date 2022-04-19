@@ -5,7 +5,7 @@ import { LoadingStatus } from "../sneakers/sneakersSlice";
 
 export interface Order {
   order: string[];
-  orderNumber: string;
+  id: string;
 }
 
 export interface OrdersState {

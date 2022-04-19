@@ -4,9 +4,10 @@ import classNames from "classnames";
 import NextArrowIcon from "../../../img/icons/NextArrow.svg";
 import styles from "./Arrows.module.scss";
 
-export const NextArrow = (props: React.HTMLProps<HTMLDivElement>) => {
-  const { onClick, className } = props;
-
+export const NextArrow: React.FC<React.HTMLProps<HTMLDivElement>> = ({
+  onClick,
+  className,
+}) => {
   return (
     <div
       className={classNames(className, styles.arrow, styles.nextArrow)}
@@ -19,9 +20,10 @@ export const NextArrow = (props: React.HTMLProps<HTMLDivElement>) => {
   );
 };
 
-export const PrevArrow = (props: React.HTMLProps<HTMLDivElement>) => {
-  const { onClick, className } = props;
-
+export const PrevArrow: React.FC<React.HTMLProps<HTMLDivElement>> = ({
+  onClick,
+  className,
+}) => {
   return (
     <div
       className={classNames(className, styles.arrow, styles.prevArrow)}

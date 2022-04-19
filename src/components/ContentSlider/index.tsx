@@ -7,7 +7,7 @@ import SliderImage from "../../img/SliderImage.png";
 import SliderLogo from "../../img/SliderLogo.png";
 import styles from "./ContentSlider.module.scss";
 
-export const ContentSlider = () => {
+export const ContentSlider: React.FC = () => {
   const settings = {
     infinite: true,
     speed: 1500,

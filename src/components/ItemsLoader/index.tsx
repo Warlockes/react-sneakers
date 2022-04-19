@@ -5,7 +5,7 @@ import styles from "./ItemsLoader.module.scss";
 
 const items = [1, 2, 3, 4, 5, 6, 7, 8];
 
-export const ItemsLoader = () => (
+export const ItemsLoader: React.FC = () => (
   <>
     {items.map((item) => (
       <div key={item} className={styles.cardLoader}>

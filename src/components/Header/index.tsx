@@ -6,10 +6,10 @@ import { ReactComponent as FavoritesIcon } from "../../img/icons/Favorites.svg";
 import { ReactComponent as OrdersIcon } from "../../img/icons/Orders.svg";
 import { toggleCartVisible } from "../../redux/features/cart/cartSlice";
 import Logo from "../../img/logo.png";
-import styles from "./Header.module.scss";
 import { selectSneakersState } from "../../redux/features/sneakers/selectors";
+import styles from "./Header.module.scss";
 
-export const Header = () => {
+export const Header: React.FC = () => {
   const dispatch = useDispatch();
   const { totalPrice } = useSelector(selectSneakersState);
 

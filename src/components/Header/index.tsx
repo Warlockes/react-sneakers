@@ -8,10 +8,19 @@ import { toggleCartVisible } from "../../redux/features/cart/cartSlice";
 import Logo from "../../img/logo.png";
 import { selectSneakersState } from "../../redux/features/sneakers/selectors";
 import styles from "./Header.module.scss";
+import classNames from "classnames";
 
 export const Header: React.FC = () => {
   const dispatch = useDispatch();
-  const { totalPrice } = useSelector(selectSneakersState);
+  const { totalPrice, items } = useSelector(selectSneakersState);
+  const cartItemsAmount = items.reduce(
+    (accum, item) => (item.added2Cart ? (accum += 1) : accum),
+    0
+  );
+  const favoriteItemsAmount = items.reduce(
+    (accum, item) => (item.added2Favorites ? (accum += 1) : accum),
+    0
+  );
 
   const handleChangeCartVisible = () => {
     dispatch(toggleCartVisible());
@@ -30,11 +39,23 @@ export const Header: React.FC = () => {
       </Link>
       <div className={styles.headerButtons}>
         <div className={styles.cartBlock} onClick={handleChangeCartVisible}>
-          <CartIcon />
+          <div className={styles.iconContainer}>
+            <CartIcon />
+            {cartItemsAmount > 0 && (
+              <div className={styles.badge}>{cartItemsAmount}</div>
+            )}
+          </div>
           {totalPrice > 0 && <span>{totalPrice} руб.</span>}
         </div>
         <Link to="/favorites">
-          <FavoritesIcon className={styles.favoritesIcon} />
+          <div className={styles.iconContainer}>
+            <FavoritesIcon className={styles.favoritesIcon} />
+            {favoriteItemsAmount > 0 && (
+              <div className={classNames(styles.badge, styles.favoriteBarde)}>
+                {favoriteItemsAmount}
+              </div>
+            )}
+          </div>
         </Link>
         <Link to="/orders">
           <OrdersIcon className={styles.orderIcon} />

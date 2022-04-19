@@ -2,31 +2,26 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
-import EmptyCart from "../../img/EmptyCart.png";
-import CartOrder from "../../img/CreateOrder.png";
-import { ReactComponent as DeleteIcon } from "../../img/icons/Delete.svg";
-import { ReactComponent as OrderIcon } from "../../img/icons/Order.svg";
 import { toggleCartVisible } from "../../redux/features/cart/cartSlice";
-import { InfoBlock } from "../InfoBlock";
 import { selectCartState } from "../../redux/features/cart/selectors";
-import { getTax } from "../../utils/utils";
-import { selectSneakersState } from "../../redux/features/sneakers/selectors";
 import {
-  fetchDeleteCartItem,
-  fetchOrder,
-} from "../../redux/features/sneakers/sneakersSlice";
-import { selectOrsersState } from "../../redux/features/orders/selectors";
-import { addOrder } from "../../redux/features/orders/ordersSlice";
-import styles from "./CartOverlay.module.scss";
+  selectIsSneakersLoading,
+  selectSneakersState,
+} from "../../redux/features/sneakers/selectors";
 
-//TODO:
-// 1) Сделать loader для корзины
-// 2) Добавить для иконок header иконки с количеством добавленных товаров
+import { selectOrsersState } from "../../redux/features/orders/selectors";
+import { CartInfoBlock } from "./CartInfoBlock";
+import { CartContent } from "./CartContent";
+import { fetchOrder } from "../../redux/features/sneakers/sneakersSlice";
+import { addOrder } from "../../redux/features/orders/ordersSlice";
+import { CartLoader } from "./CartLoader";
+import styles from "./CartOverlay.module.scss";
 
 export const CartOverlay: React.FC = () => {
   const [cartInfo, setCartInfo] = useState<"empty" | "order">("empty");
   const { isOpenCart } = useSelector(selectCartState);
-  const { items, totalPrice } = useSelector(selectSneakersState);
+  const { items } = useSelector(selectSneakersState);
+  const isLoading = useSelector(selectIsSneakersLoading);
   const { orders } = useSelector(selectOrsersState);
   const dispatch = useDispatch();
   const cartItems = items.filter(({ added2Cart }) => added2Cart);
@@ -67,62 +62,19 @@ export const CartOverlay: React.FC = () => {
       <div className={styles.cart}>
         <h2>Корзина</h2>
         <div className={styles.cartContent}>
-          {cartItems.length > 0 ? (
-            <>
-              <div className={styles.cartList}>
-                {cartItems.map((item) => {
-                  const { id, imageUrl, price, title } = item;
-
-                  return (
-                    <div key={id} className={styles.cartItem}>
-                      <div className={styles.itemImageContainer}>
-                        <img src={imageUrl} alt="Cart Item" />
-                      </div>
-                      <div className={styles.description}>
-                        <p>{title}</p>
-                        <p>{price} руб.</p>
-                      </div>
-                      <div
-                        className={classNames("btn", styles.deleteBtn)}
-                        onClick={() => dispatch(fetchDeleteCartItem(item))}
-                      >
-                        <DeleteIcon />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-              <div className={styles.orderContainer}>
-                <div>
-                  <p>Итого:</p>
-                  <div />
-                  <p>{totalPrice} руб.</p>
-                </div>
-                <div>
-                  <p>Налог 5%:</p>
-                  <div />
-                  <p>{getTax(totalPrice)} руб.</p>
-                </div>
-                <div
-                  className={classNames(styles.orderBnt, "cartBtn")}
-                  onClick={handleOrder}
-                >
-                  <span>Оформить заказ</span>
-                  <OrderIcon height={12} />
-                </div>
-              </div>
-            </>
+          {isLoading ? (
+            <CartLoader />
           ) : (
-            <InfoBlock
-              title={isEmptyCartInfo ? "Корзина пуста" : "Заказ оформлен!"}
-              description={
-                isEmptyCartInfo
-                  ? "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ"
-                  : `Ваш заказ #${orders.length} скоро будет передан курьерской доставке`
-              }
-              imageSrc={isEmptyCartInfo ? EmptyCart : CartOrder}
-              isOrder={isEmptyCartInfo}
-            />
+            <>
+              {cartItems.length > 0 ? (
+                <CartContent items={cartItems} handleClickOrder={handleOrder} />
+              ) : (
+                <CartInfoBlock
+                  isEmpty={isEmptyCartInfo}
+                  orderNumber={orders.length}
+                />
+              )}
+            </>
           )}
         </div>
       </div>

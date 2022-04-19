@@ -92,6 +92,10 @@ export const sneakersSlice = createSlice({
         return item;
       });
     },
+
+    orderItems(state) {
+      state.items = state.items.map((item) => ({ ...item, added2Cart: false }));
+    },
   },
 });
 
@@ -149,6 +153,17 @@ export const fetchDeleteFavoriteItem =
     }
   };
 
+export const fetchOrder =
+  (items: SneakersItem[]) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(orderItems());
+      dispatch(setTotalPrice());
+      await API.orderItems(items);
+    } catch {
+      alert("Ошибка при создании заказа");
+    }
+  };
+
 export const {
   setLoadingStatus,
   setInitialData,
@@ -157,6 +172,7 @@ export const {
   deleteCartItem,
   addFavoriteItem,
   deleteFavoriteItem,
+  orderItems,
 } = sneakersSlice.actions;
 
 export default sneakersSlice.reducer;

@@ -11,6 +11,7 @@ import {
   selectSneakersState,
 } from "../../redux/features/sneakers/selectors";
 import styles from "./Favorites.module.scss";
+import { Link } from "react-router-dom";
 
 export const Favorites: React.FC = () => {
   const { items } = useSelector(selectSneakersState);
@@ -19,7 +20,7 @@ export const Favorites: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className={styles.productList}>
+      <div className={classNames(styles.productList, styles.productListLoader)}>
         <ItemsLoader />
       </div>
     );
@@ -30,9 +31,11 @@ export const Favorites: React.FC = () => {
       {favoriteItems.length > 0 ? (
         <>
           <div className={styles.title}>
-            <div className={classNames("btn", styles.backBtn)}>
-              <BackIcon />
-            </div>
+            <Link to="/">
+              <div className={classNames("btn", styles.backBtn)}>
+                <BackIcon />
+              </div>
+            </Link>
             <h2>Мои закладки</h2>
           </div>
           <div className={styles.productList}>

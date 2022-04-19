@@ -40,4 +40,24 @@ export const API = {
     );
     return data;
   },
+
+  async orderItems(items: SneakersItem[]) {
+    const { data } = await axios.post(
+      "https://61752ca008834f0017c70b34.mockapi.io/orders",
+      {
+        order: items.map(({ id }) => id),
+      }
+    );
+
+    items.forEach((item) => this.deleteCartItem(item));
+
+    return data;
+  },
+
+  async fetchOrders() {
+    const { data } = await axios.get(
+      "https://61752ca008834f0017c70b34.mockapi.io/orders"
+    );
+    return data;
+  },
 };

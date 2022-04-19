@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,19 +11,33 @@ import { InfoBlock } from "../InfoBlock";
 import { selectCartState } from "../../redux/features/cart/selectors";
 import { getTax } from "../../utils/utils";
 import { selectSneakersState } from "../../redux/features/sneakers/selectors";
+import {
+  fetchDeleteCartItem,
+  fetchOrder,
+} from "../../redux/features/sneakers/sneakersSlice";
+import { selectOrsersState } from "../../redux/features/orders/selectors";
+import { addOrder } from "../../redux/features/orders/ordersSlice";
 import styles from "./CartOverlay.module.scss";
-import { fetchDeleteCartItem } from "../../redux/features/sneakers/sneakersSlice";
 
 //TODO:
 // 1) Сделать loader для корзины
 // 2) Добавить для иконок header иконки с количеством добавленных товаров
-// 3) Сместить лоадер в избранном вниз, чтобы был там, где появляются карточки
+// 3) Поправить верстку и выдавать заказы по номерам: заказ 1: []...
 
 export const CartOverlay: React.FC = () => {
-  const dispatch = useDispatch();
+  const [cartInfo, setCartInfo] = useState<"empty" | "order">("empty");
   const { isOpenCart } = useSelector(selectCartState);
   const { items, totalPrice } = useSelector(selectSneakersState);
+  const { orders } = useSelector(selectOrsersState);
+  const dispatch = useDispatch();
   const cartItems = items.filter(({ added2Cart }) => added2Cart);
+  const isEmptyCartInfo = cartInfo === "empty";
+
+  useEffect(() => {
+    if (!isOpenCart) {
+      setTimeout(() => setCartInfo("empty"), 1000);
+    }
+  }, [isOpenCart]);
 
   const handleClickOutsideCart = (event: React.MouseEvent) => {
     const { target } = event;
@@ -31,6 +45,12 @@ export const CartOverlay: React.FC = () => {
     if (target instanceof Element && !target.closest(`.${styles.cart}`)) {
       dispatch(toggleCartVisible());
     }
+  };
+
+  const handleOrder = () => {
+    setCartInfo("order");
+    dispatch(fetchOrder(cartItems));
+    dispatch(addOrder(cartItems.map(({ id }) => id)));
   };
 
   return (
@@ -79,7 +99,10 @@ export const CartOverlay: React.FC = () => {
                   <div />
                   <p>{getTax(totalPrice)} руб.</p>
                 </div>
-                <div className={classNames(styles.orderBnt, "cartBtn")}>
+                <div
+                  className={classNames(styles.orderBnt, "cartBtn")}
+                  onClick={handleOrder}
+                >
                   <span>Оформить заказ</span>
                   <OrderIcon height={12} />
                 </div>
@@ -87,17 +110,15 @@ export const CartOverlay: React.FC = () => {
             </>
           ) : (
             <InfoBlock
-              title="Корзина пуста"
-              description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ"
-              imageSrc={EmptyCart}
+              title={isEmptyCartInfo ? "Корзина пуста" : "Заказ оформлен!"}
+              description={
+                isEmptyCartInfo
+                  ? "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ"
+                  : `Ваш заказ #${orders.length} скоро будет передан курьерской доставке`
+              }
+              imageSrc={isEmptyCartInfo ? EmptyCart : CartOrder}
+              isOrder={isEmptyCartInfo}
             />
-
-            // <InfoBlock
-            //   title="Заказ оформлен!"
-            //   description="Ваш заказ #18 скоро будет передан курьерской доставке"
-            //   imageSrc={CartOrder}
-            //   isOrder
-            // />
           )}
         </div>
       </div>

@@ -11,17 +11,26 @@ import {
   selectOrsersState,
 } from "../../redux/features/orders/selectors";
 import { useEffect } from "react";
-import { LoadingStatus } from "../../redux/features/sneakers/sneakersSlice";
 import { ItemsLoader } from "../../components/ItemsLoader";
+import { fetchOrders } from "../../redux/features/orders/ordersSlice";
+import { Link } from "react-router-dom";
+import { selectSneakersState } from "../../redux/features/sneakers/selectors";
 
 export const Orders = () => {
   const dispatch = useDispatch();
-  const { items, loadingStatus } = useSelector(selectOrsersState);
+  const { orders } = useSelector(selectOrsersState);
+  const { items } = useSelector(selectSneakersState);
   const isLoading = useSelector(selectIsOrdersItemsLoading);
+  const ordersItemIds = orders.flatMap(({ order }) => order);
+  const renderItems = items.filter((item) => ordersItemIds.includes(item.id));
+
+  useEffect(() => {
+    dispatch(fetchOrders());
+  }, [dispatch]);
 
   if (isLoading) {
     return (
-      <div className={styles.productList}>
+      <div className={classNames(styles.productList, styles.productListLoader)}>
         <ItemsLoader />
       </div>
     );
@@ -29,17 +38,19 @@ export const Orders = () => {
 
   return (
     <>
-      {items.length > 0 ? (
+      {orders.length > 0 ? (
         <>
           <div className={styles.title}>
-            <div className={classNames("btn", styles.backBtn)}>
-              <BackIcon />
-            </div>
+            <Link to="/">
+              <div className={classNames("btn", styles.backBtn)}>
+                <BackIcon />
+              </div>
+            </Link>
             <h2>Мои покупки</h2>
           </div>
           <div className={styles.productList}>
-            {items.map((item) => (
-              <Card key={item.id} item={item} />
+            {renderItems.map((item, index) => (
+              <Card key={index} item={item} />
             ))}
           </div>
         </>

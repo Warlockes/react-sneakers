@@ -50,12 +50,12 @@
 
   & > a {
     display: flex;
+    margin-left: 30px;
   }
 }
 
 .favoritesIcon,
 .orderIcon {
-  margin-left: 30px;
   cursor: pointer;
 }
 
